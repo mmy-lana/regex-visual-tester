@@ -1,11 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { TesterComponent } from './features/tester/tester.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
-  templateUrl: './app.html',
+  standalone: true,
+  imports: [TesterComponent],
+  template: `<app-tester></app-tester>`,
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('regex-visual-tester');
-}
+export class AppComponent {}
