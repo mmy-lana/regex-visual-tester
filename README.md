@@ -1,59 +1,96 @@
-# RegexVisualTester
+# RegEx Visual Tester
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.6.
+An interactive, high-contrast, document-style regular expression development tool built using **Angular** and **Tailwind CSS v4**.
 
-## Development server
+- **Live Demo:** [https://regex-visual-tester.vercel.app/](https://regex-visual-tester.vercel.app/)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 🛠️ Tech Stack & Key Features
+
+* **Angular (v22+)** – Robust reactive state management powered entirely by Angular Signals.
+* **Tailwind CSS v4** – Modern CSS-first design setup with stark, high-contrast, documentation-style aesthetic.
+* **Atomic & DDD Structure** – Separation of globally reusable UI primitives from rich, isolated feature domains.
+* **Precompiled RegEx Engine** – Real-time validation, syntax parsing, matches offset detection, and capture group mapping.
+* **Interactive Presets** – Instant mock testing using production-ready presets (emails, dates, HTML tags).
+
+---
+
+## 📂 Architecture Structure
+
+The workspace follows a strict modular separation matching Atomic and Domain-Driven design paradigms:
+
+```text
+src/
+└── app/
+    ├── core/                          # Global Singletons (Models, Configs, Services)
+    │   └── models/
+    │       └── regex.model.ts         # Base contracts for capture groups & matches
+    ├── shared/                        # Atomic Layout Primitives
+    │   └── components/
+    │       └── ui/
+    │           ├── badge/             # Atomic high-contrast badge
+    │           ├── button/            # Flat offset-shadow interactive button
+    │           └── card/              # Structured container layout cards
+    └── features/                      # Domain Feature Workspace
+        └── tester/                    # Main RegEx Tester Dashboard
+            ├── components/            # Isolated components (Input, Editor, Highlights)
+            ├── services/
+            │   └── tester-state.service.ts # Core evaluation state & Signals manager
+            └── tester.component.ts    # Dashboard root container
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 💻 Local Workspace Management
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Local Development Server
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Run the development server locally:
 
 ```bash
-ng generate --help
+npm run start
+# Or using the global CLI: ng serve
 ```
 
-## Building
+Navigate to `http://localhost:4200/`. The workspace compiles in memory and reloads on changes.
 
-To build the project run:
+### Production Build
+
+Compile the production artifacts:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This optimizes code, runs compilation hooks, and stores static assets inside the `dist/regex-visual-tester/browser` folder.
 
-## Running unit tests
+### Testing
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Run tests through Vitest:
 
 ```bash
-ng test
+npm run test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🚀 Cloud Deployment
 
-```bash
-ng e2e
+The project is preconfigured to deploy directly onto Vercel. 
+
+### Custom Fallback Routing
+To enable deep-linking routing and prevent MIME-type static asset blocking on direct refreshes, the project utilizes a optimized fallback rewrite structure:
+
+```json
+{
+  "version": 2,
+  "outputDirectory": "dist/regex-visual-tester/browser",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
 ```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
